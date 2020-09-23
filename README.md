@@ -1,6 +1,6 @@
-#Healthworker Diligence Prediction System
+# Healthworker Diligence Prediction System
 
-##Dependencies
+## Dependencies
 
 - Python
 - R
@@ -27,11 +27,10 @@
 - Testing on: anaconda (conda 4.8.3)
 
 
-##Code description (General)
+## Code description (General)
 
-_(This includes only a summarized view and I will attach a detailed document to the project folder later)_
 
-####Basic steps done in the code
+#### Basic steps done in the code
 - Find percentages according to the 18 rules and draw KDEs
 - Calculate the diligence probabilities using the KDE
 - Cluster them to diligence and non-diligence clusters using c-means
@@ -40,11 +39,12 @@ _(This includes only a summarized view and I will attach a detailed document to 
 - Train the model
 - Predict the non-diligence score using history
 
-####Fixed steps
+#### Fixed steps
 - KDEs are drawn using the previously provided data set. They will not be recalculated
 - Cluster centers which are found using c-means algorithm are fixed and will not be recalculated.
 - Model will not be retrained on new data
-####Steps for new data
+
+#### Steps for new data
 - Provide the data in excel or csv format
 - Add the location of data, file names, date ranges and ANM sub center ids which need scores to the config file 
 
