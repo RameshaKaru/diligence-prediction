@@ -1,0 +1,13 @@
+name: hdpstest3
+dependencies:
+  - pip=20.2.2
+  - numpy=1.18.5
+  - pandas=1.1.1
+  - xlrd=1.2.0
+  - scikit-learn=0.23.2
+  - rpy2=2.9.4
+  - pyyaml=5.3.1
+  - pip:
+    - tensorflow==2.3.0
+    - scikit-fuzzy==0.4.2
+

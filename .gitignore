@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Distribution / packaging
+data/Google_KB_Test_Dataset.xlsx
+data/Master_Dataset_KB-Google.xlsx
+fixedinputs/allANM.csv
+outputs/scores.csv
+
