@@ -1,13 +1,10 @@
-#Healthworker Diligence Prediction System
-
-##Dependencies
+## Dependencies
 
 - Python
 - R
 
 - R packages:
 	- kde1d
-	- DescTools
  
 - To combine R and python:
     - rpy2
@@ -17,11 +14,13 @@
     - pandas
     - numpy
     - matplotlib
-    - seaborn
     - datetime
-    - math
     - sklearn
     - dateutil
-    - keras
+    - tensorflow
+    - xlrd
+    - pyyaml
 
-- Testing on: anaconda (conda 4.8.3)
+- Tested on: anaconda (conda 4.8.3)
+
+Dependencies with tested versions can be found [here](../setup/environment.yaml).

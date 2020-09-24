@@ -5,8 +5,9 @@
 2. [Adding data to the system](../data/README.md)
 3. [How to get predictions scores](../diligenceprediction/README.md)
 
-### Description
+### Descriptions
 1. [General description of what happens in the implementation](./description.md)
 2. [Overview of the model](../models/README.md)
+3. [List of dependencies](requirements.md)
 
 
