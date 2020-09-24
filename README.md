@@ -7,7 +7,6 @@
 
 - R packages:
 	- kde1d
-	- DescTools
  
 - To combine R and python:
     - rpy2
@@ -17,14 +16,14 @@
     - pandas
     - numpy
     - matplotlib
-    - seaborn
     - datetime
-    - math
     - sklearn
     - dateutil
     - keras
+    - xlrd
+    - pyyaml
 
-- Testing on: anaconda (conda 4.8.3)
+- Tested on: anaconda (conda 4.8.3)
 
 
 ## Code description (General)
