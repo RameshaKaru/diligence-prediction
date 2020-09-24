@@ -20,12 +20,16 @@ class HDPS:
         self.allANMdf = get_all_ANM()
         self.num_files = len(self.configs['datafiles'])
         self.predictANMids = get_predict_ANM(self.configs["next_sub_center_ids_file"])
+        self.ignore_dates = self.configs['ignore_dates']
 
     def preprocess_data(self):
         print("PREPROCESSING DATA")
 
         # sliding windows
         sliding_dates_list = self.get_sliding_dates_list()
+        add_lookback_days = self.get_add_lookback_days(sliding_dates_list)
+
+        print(add_lookback_days)
 
         # read all original dataframes
         df_list, dftwins_list = self.get_all_df()
@@ -45,7 +49,8 @@ class HDPS:
                                     sliding_dates=sliding_dates_list[i],
                                     all_campdate_df=all_campdate_df_list[i],
                                     df_all=df_all_list[i],
-                                    dftwins_all=dftwins_all_list[i])
+                                    dftwins_all=dftwins_all_list[i],
+                                    add_lookback_days=add_lookback_days[i])
             fraud_probabilities, meta_features = features_obj.get_fraud_probabilities()
 
             fraud_prob = fraud_probabilities.swapaxes(1, 2)
@@ -131,13 +136,43 @@ class HDPS:
 
         return sliding_dates_list
 
+    def get_add_lookback_days(self, sliding_dates_list):
+        get_add_lookback_days = []
+
+        if self.ignore_dates is None:
+            for i in range(self.num_files):
+                temp = np.zeros(len(sliding_dates_list[i][1]))
+                get_add_lookback_days.append(temp)
+
+        else:
+            ign_sets = len(self.ignore_dates)
+            for i in range(ign_sets):
+                self.ignore_dates[i]['start_date'] = datetime.datetime.strptime(self.ignore_dates[i]['start_date'], '%Y, %m, %d').date()
+                self.ignore_dates[i]['end_date'] = datetime.datetime.strptime(self.ignore_dates[i]['end_date'], '%Y, %m, %d').date()
+
+            for i in range(self.num_files):
+                temp = []
+                for j in range(len(sliding_dates_list[i][1])):
+                    slide_end_date = sliding_dates_list[i][1][j]
+                    slide_start_date = slide_end_date + relativedelta(months=-6)
+                    overlap = 0
+                    for k in range(ign_sets):
+                        latest_start = max(self.ignore_dates[k]['start_date'], slide_start_date)
+                        earliest_end = min(self.ignore_dates[k]['end_date'], slide_end_date)
+                        delta = (earliest_end - latest_start).days
+                        overlap = overlap + max(0, delta)
+                    temp.append(overlap)
+                get_add_lookback_days.append(temp)
+
+        return get_add_lookback_days
+
+
     def predict_scores_next(self, history_vect, num_anm=85):
         print("PREDICTING")
         last_history_vect = history_vect[-num_anm:, :, :]
         print(last_history_vect.shape)
 
         y_pred = self.model.predict(last_history_vect)
-        print(y_pred.shape)
 
         if self.predictANMids is None:
             print("IDs of the sub centers where camps will be held is not provided. Hence predicting for all")
@@ -154,13 +189,4 @@ class HDPS:
                 {'sub_center_id': anm_mask, 'scores': y_pred_mask[:, 1]})
             scores_df.to_csv('outputs/scores.csv')
 
-
-
-
-
-
-# if __name__ == '__main__':
-#     hdps = HDPS()
-#     test_fraud_prob, history_vect = hdps.preprocess_data()
-#     hdps.predict_scores_next(history_vect)
 

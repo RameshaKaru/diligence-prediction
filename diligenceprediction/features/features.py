@@ -8,14 +8,14 @@ from ..ruleskde.shortrangerules import ShortRangeRules
 
 class Features:
 
-    def __init__(self, allANMdf ,kdes, sliding_dates, all_campdate_df, df_all, dftwins_all):
+    def __init__(self, allANMdf ,kdes, sliding_dates, all_campdate_df, df_all, dftwins_all, add_lookback_days):
         self.allANMdf = allANMdf
         self.kdes = kdes
         self.sliding_dates = sliding_dates
         self.all_campdate_df = all_campdate_df
         self.df_all = df_all
         self.dftwins_all = dftwins_all
-
+        self.add_lookback_days = add_lookback_days
 
 
     # Gets the fraud probabilities for each rule by running a sliding window
@@ -43,6 +43,7 @@ class Features:
             # for i in range(2):
             rule_probabilities = []
             end_date = self.sliding_dates[1][i]
+            lookback = self.add_lookback_days[i]
 
             # camp date level rules
             start_date = end_date + relativedelta(weeks=-window_size_weeks)
@@ -53,13 +54,13 @@ class Features:
 
             # for patient level rules
             for j in range(len(patient_level_rules)):
-                p_start_date = end_date + relativedelta(months=-6)
+                p_start_date = end_date + relativedelta(months=-6) + relativedelta(days=-lookback)
                 patient_df = self.get_window_df(self.df_all, p_start_date, end_date, column=patient_dates_columns[j])
                 probabilities = patient_level_rules[j](patient_df, self.allANMdf)
                 rule_probabilities.append(probabilities)
 
             # for death rule
-            d_start_date = end_date + relativedelta(months=-6)
+            d_start_date = end_date + relativedelta(months=-6) + relativedelta(days=-lookback)
             patient_df = self.get_window_df(self.dftwins_all, d_start_date, end_date, column='ANC_Date Of Outcome')
             probabilities = longRules.deathRule(patient_df, self.allANMdf)
             rule_probabilities.append(probabilities)
