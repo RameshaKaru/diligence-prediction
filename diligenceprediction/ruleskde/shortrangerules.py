@@ -114,7 +114,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe with all ANM
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -193,7 +193,7 @@ class ShortRangeRules:
         uranm = uranm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, uranm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, uranm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -269,7 +269,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -351,7 +351,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -425,7 +425,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -503,7 +503,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -580,7 +580,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -658,7 +658,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -735,7 +735,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -812,7 +812,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -889,7 +889,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -966,7 +966,7 @@ class ShortRangeRules:
         bpanm = bpanm.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bpanm, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])

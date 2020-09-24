@@ -80,7 +80,7 @@ class MergeDates:
                         sortedOriginalDates['camp_id'] == campid)].reset_index()
 
                 # merge with dummy dataframe
-                df_merge = pd.merge(dummydates, campdf, on='date', how='outer')
+                df_merge = pd.merge(dummydates, campdf, on='date', how='left')
                 df_merge['Num_patients'].fillna(0, inplace=True)
 
                 datesOriginal = df_merge['date']

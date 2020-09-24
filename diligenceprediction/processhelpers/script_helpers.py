@@ -84,8 +84,12 @@ def get_all_ANM():
 
 
 def get_predict_ANM(fileName):
-    df = pd.read_csv(fileName)
-    return df
+    if fileName == None :
+        return None
+    else:
+        df = pd.read_csv(fileName)
+        next_anm_id = np.array(df['sub_center_id'])
+        return next_anm_id
 
 
 def get_campdate_level_df(df, online_day):

@@ -17,4 +17,4 @@ datafiles:
           end_date: 2020, 04, 30
 # csv file with the sub center ids, where the camps will be held in the next prediction window
 # this file is needed to filter out only the needed ANMs, so that it will be easier to rank them
-next_sub_center_ids_file: "data/sub_center_ids.csv"
+next_sub_center_ids_file: "data/next_sub_center_ids.csv"

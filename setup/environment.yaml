@@ -1,4 +1,4 @@
-name: hdpstest3
+name: hdpsenv
 dependencies:
   - pip=20.2.2
   - numpy=1.18.5

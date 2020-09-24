@@ -114,7 +114,7 @@ class Features:
         bpanm = bpanm.assign(dates_diff=dates_diff.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(self.allANMdf, bpanm, on='sub_center_id', how='outer')
+        df_merge = pd.merge(self.allANMdf, bpanm, on='sub_center_id', how='left')
 
         t = df_merge['Tot_num_patients'].isna().sum()
         df_merge['Tot_num_patients'].fillna(0, inplace=True)

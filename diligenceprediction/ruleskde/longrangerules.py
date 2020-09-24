@@ -85,7 +85,7 @@ class LongRangeRules:
         dr = dr.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, dr, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, dr, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -131,7 +131,7 @@ class LongRangeRules:
         bl = bl.assign(fraud_probabilities=fraud_probabilities)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bl, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bl, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(np.mean(df_merge['fraud_probabilities']), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -175,7 +175,7 @@ class LongRangeRules:
         bl = bl.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bl, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bl, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -221,7 +221,7 @@ class LongRangeRules:
         bl = bl.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, bl, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, bl, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -276,7 +276,7 @@ class LongRangeRules:
         dfanm3 = dfanm3.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, dfanm3, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, dfanm3, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])
@@ -328,7 +328,7 @@ class LongRangeRules:
         ebf = ebf.assign(fraud_probabilities=fraud_probabilities.values)
 
         # merge with dummy dataframe
-        df_merge = pd.merge(dummydf, ebf, on='sub_center_id', how='outer')
+        df_merge = pd.merge(dummydf, ebf, on='sub_center_id', how='left')
         df_merge['fraud_probabilities'].fillna(df_merge['fraud_probabilities'].mean(), inplace=True)
 
         return list(df_merge['fraud_probabilities'])

@@ -10,9 +10,6 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import pandas as pd
 import numpy as np
-# import time
-#
-# start_time = time.time()
 
 
 class HDPS:
@@ -25,7 +22,7 @@ class HDPS:
         self.model = get_saved_model()
         self.allANMdf = get_all_ANM()
         self.num_files = len(self.configs['datafiles'])
-        # self.predictANMids = get_predict_ANM(self.configs["next_sub_center_ids_file"])
+        self.predictANMids = get_predict_ANM(self.configs["next_sub_center_ids_file"])
 
     def preprocess_data(self):
         print("PREPROCESSING DATA")
@@ -145,8 +142,22 @@ class HDPS:
         y_pred = self.model.predict(last_history_vect)
         print(y_pred.shape)
 
-        scores_df = pd.DataFrame({'sub_center_id': np.array(self.allANMdf['sub_center_id']), 'scores': y_pred[:,1]})
-        scores_df.to_csv('outputs/scores.csv')
+        if self.predictANMids is None:
+            print("IDs of the sub centers where camps will be held is not provided. Hence predicting for all")
+            scores_df = pd.DataFrame({'sub_center_id': np.array(self.allANMdf['sub_center_id']), 'scores': y_pred[:,1]})
+            scores_df.to_csv('outputs/scores.csv')
+        else:
+            next_anm_df = pd.DataFrame({'sub_center_id': self.predictANMids, 'flag': np.full((len(self.predictANMids)), True)})
+            df_merge = pd.merge(self.allANMdf, next_anm_df, how="left", on="sub_center_id")
+            df_merge['flag'].fillna(False, inplace=True)
+            mask = df_merge['flag']
+            y_pred_mask = y_pred[mask]
+            anm_mask = np.array(self.allANMdf['sub_center_id'])[mask]
+            scores_df = pd.DataFrame(
+                {'sub_center_id': anm_mask, 'scores': y_pred_mask[:, 1]})
+            scores_df.to_csv('outputs/scores.csv')
+
+
 
 
 
@@ -155,6 +166,4 @@ class HDPS:
 #     hdps = HDPS()
 #     test_fraud_prob, history_vect = hdps.preprocess_data()
 #     hdps.predict_scores_next(history_vect)
-#
-#     print("end")
-#     print("--- %s seconds ---" % (time.time() - start_time))
+

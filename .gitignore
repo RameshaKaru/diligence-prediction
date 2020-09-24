@@ -8,6 +8,6 @@ __pycache__/
 # Distribution / packaging
 data/Google_KB_Test_Dataset.xlsx
 data/Master_Dataset_KB-Google.xlsx
+data/next_sub_center_ids.csv
 fixedinputs/allANM.csv
 outputs/scores.csv
-
