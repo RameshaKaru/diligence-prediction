@@ -21,6 +21,6 @@
 - Code calculates the diligence vectors using the KDEs drawn for 18 rules
 - And predicts the non-diligence scores for the next 4 weeks, using history of 6 months of non-diligence vectors
 
-
+> Main documentation [link](README.md)
 
 

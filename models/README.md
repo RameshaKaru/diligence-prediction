@@ -12,3 +12,6 @@ This model is a regression model with a LSTM layer followed by a dense layer. Th
 #### Neural network summary
 
 ![image info](./summary.JPG)
+
+
+> Main documentation [link](../docs/README.md)

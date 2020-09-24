@@ -41,3 +41,5 @@ next_sub_center_ids_file: "data/next_sub_center_ids.csv"
     - provide the csv file location with name from the root package
     - include the sub center ids under the column name 'sub_center_id' in the csv
     
+    
+> Main documentation [link](../docs/README.md)

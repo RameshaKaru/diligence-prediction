@@ -14,4 +14,4 @@
     - ANMs with higher scores are more non-diligent
     - These non-diligence scores corresponds to the prediction for the upcoming 4 weeks, from the last processed time window of the data set
     
-    
+> Main documentation [link](../docs/README.md)

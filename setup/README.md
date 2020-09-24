@@ -21,3 +21,5 @@ python setup/setup_r_lib.py
 
 Now the environment is ready with all needed dependencies.
 
+> Main documentation [link](../docs/README.md)
+
