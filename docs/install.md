@@ -1,18 +1,25 @@
-anaconda
-conda install pip
-pip install tensorflow / conda install tensorflow=2.1.0 python=3.7
-pip install pyyaml
-conda install xlrd
-pip install scikit-fuzzy
-conda install pandas
-pip install scikit-learn
-conda install rpy2
+## Setting the environment
 
+- Install anaconda following [these instructions](https://docs.anaconda.com/anaconda/install/linux/) 
+- Navigate to the root project folder. (Below commands are given assuming executions are done from the root package)
+- Execute the below command to install needed dependencies
+```commandline
+ conda env create -f setup/environment.yaml
+```
+- Then you can activate the conda environment using below command
 
-https://docs.anaconda.com/anaconda/install/linux/
-conda env create -f environment.yml
-conda activate {envname}
-pip install scikit-fuzzy
-pip install tensorflow
-python setup/rlib.py
-press 1
+```commandline
+conda activate hdpsenv
+```
+- Needed R packages can be installed by executing the below command.
+
+```commandline
+python setup/setup_r_lib.py
+```
+
+- Choose the needed CRAN mirror when prompted. Recommended to use the 1st mirror.
+
+Now the environment is ready with all needed dependencies.
+
+> Main documentation [link](README.md)
+
