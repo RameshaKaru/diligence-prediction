@@ -6,7 +6,7 @@
 3. [How to get predictions scores](../diligenceprediction/README.md)
 
 ### Description
-1. [General description of what happens in the implementation?](./description.md)
+1. [General description of what happens in the implementation](./description.md)
 2. [Overview of the model](../models/README.md)
 
 

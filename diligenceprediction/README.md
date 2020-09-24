@@ -1,4 +1,4 @@
-### How to get the non-diligence scores prediction for the next time window?
+## How to get the non-diligence scores prediction for the next time window?
 
 1. Setup your environment following the [setup guide](../setup/README.md)
 2. Add the data files (Excel files) to the /data folder (or a folder you prefer)

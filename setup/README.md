@@ -1,4 +1,4 @@
-### Setting the environment
+## Setting the environment
 
 - Install anaconda following [these instructions](https://docs.anaconda.com/anaconda/install/linux/) 
 - Navigate to the root project folder. (Below commands are given assuming executions are done from the root package)

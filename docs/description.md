@@ -1,6 +1,6 @@
-### General description of the implementation
+## General description of the implementation
 
-####Basic steps done in the code
+#### Basic steps done in the code
 - Find percentages according to the 18 rules and draw KDEs
 - Calculate the diligence probabilities using the KDE
 - Cluster them to diligence and non-diligence clusters using c-means
@@ -9,12 +9,12 @@
 - Train the model
 - Predict the non-diligence score using history
 
-####Fixed steps
+#### Fixed steps
 - KDEs are drawn using the previously provided data set. They will not be recalculated
 - Cluster centers which are found using c-means algorithm are fixed and will not be recalculated.
 - Model will not be retrained on new data
 
-####Steps for new data
+#### Steps for new data
 - Provide the data in excel format
 - Add the location of data, file names, date ranges and ANM sub center ids which need scores to the config file 
 

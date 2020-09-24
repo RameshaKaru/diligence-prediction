@@ -1,4 +1,4 @@
-### Adding new data
+## Adding new data
 
 - Data files (Excel files in the agreed format) can be added to this folder and referred in the config file (Config file should be present in the root package. i.e. one level above this)
 - An example config file is available below
