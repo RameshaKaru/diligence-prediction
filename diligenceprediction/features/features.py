@@ -7,8 +7,29 @@ from ..ruleskde.shortrangerules import ShortRangeRules
 
 
 class Features:
+    """
+    This class handles obtaining the features; i.e the non diligence probability vectors of ANMs and meta data of ANMs
 
-    def __init__(self, allANMdf ,kdes, sliding_dates, all_campdate_df, df_all, dftwins_all, add_lookback_days):
+    """
+
+    def __init__(self, allANMdf, kdes, sliding_dates, all_campdate_df, df_all, dftwins_all, add_lookback_days):
+        """
+        Initializes the features class with parameters related to preprocessed data
+
+        Parameters
+        ----------
+        allANMdf : dataframe
+            dataframe with all sub center ids
+        kdes : KDE object
+            KDEs of 18 rules
+        sliding_dates :  list
+            sliding window dates (only the end date of each slide is in the list)
+        all_campdate_df, df_all, dftwins_all: dataframe
+            preprocessed dataframes
+        add_lookback_days: list
+            list of additional days to look back for long range rules (if ignore date ranges are specified)
+
+        """
         self.allANMdf = allANMdf
         self.kdes = kdes
         self.sliding_dates = sliding_dates
@@ -18,8 +39,22 @@ class Features:
         self.add_lookback_days = add_lookback_days
 
 
-    # Gets the fraud probabilities for each rule by running a sliding window
     def get_fraud_probabilities(self, window_size_weeks=4):
+        """
+        Calculates the non-diligence probabilities for each rule for each ANM by running a sliding window
+
+        Parameters
+        ----------
+        window_size_weeks : int
+            sliding window size
+
+        Returns
+        -------
+        window_probabilities : non-diligence probabilities for each window each rule each ANM
+        features: meta features of each ANM in each sliding window
+
+        """
+
         longRules = LongRangeRules(self.kdes)
         shortRules = ShortRangeRules(self.kdes)
 
@@ -39,10 +74,9 @@ class Features:
         window_probabilities = []
         features = []
         t1 = []
-        for i in range(len(self.sliding_dates[1])):
-            # for i in range(2):
+        for i in range(len(self.sliding_dates)):
             rule_probabilities = []
-            end_date = self.sliding_dates[1][i]
+            end_date = self.sliding_dates[i]
             lookback = self.add_lookback_days[i]
 
             # camp date level rules
@@ -74,12 +108,19 @@ class Features:
         window_probabilities = np.array(window_probabilities)
         features = np.asarray(features)
         print(window_probabilities.shape)
-        # print(features.shape)
-        # print(np.sum(t1))
 
         return window_probabilities, features
 
     def get_window_features(self, campdate_df):
+        """
+        Finds meta data of each ANM in each time window
+
+        Parameters
+        ----------
+        campdate_df : dataframe
+            preprocessed dataframe
+
+        """
 
         grouped = campdate_df.groupby(['sub_center_id', 'camp_id'])
         bp = grouped.agg(
@@ -123,14 +164,31 @@ class Features:
         df_merge['dates_diff'].fillna(0, inplace=True)
         df_merge['Num_locations'].fillna(0, inplace=True)
 
-        #df_merge.to_csv('test2.csv')
-
         window_features = np.asarray([np.asarray(df_merge['Tot_num_patients']), np.asarray(df_merge['Num_camps']),
                                       np.asarray(df_merge['dates_diff']), np.asarray(df_merge['Num_locations'])])
 
         return np.transpose(window_features), t
 
     def get_window_df(self, df, start_date, end_date, column='cluster_date'):
+        """
+        Extracts a dataframe within a given date range
+
+        Parameters
+        ----------
+        df : dataframe
+            full dataframe to be processed
+        start_date : date
+            start date
+        end_date : date
+            end date
+        column: string
+            column based on which the dates should be extracted
+
+        Returns
+        -------
+        dataframe within the given time range
+
+        """
         df[column] = pd.to_datetime(df[column])
         mask = (df[column] > pd.to_datetime(start_date)) & (df[column] <= pd.to_datetime(end_date))
         new_df = df.loc[mask]

@@ -5,9 +5,17 @@ __pycache__/
 .idea/
 
 
-# Distribution / packaging
+# data & results
 data/Google_KB_Test_Dataset.xlsx
 data/Master_Dataset_KB-Google.xlsx
 data/next_sub_center_ids.csv
 fixedinputs/allANM.csv
 outputs/scores.csv
+outputs/past_scores0.csv
+outputs/past_scores1.csv
+outputs/past_scores2.csv
+outputs/past_scores3.csv
+outputs/past_scores4.csv
+outputs/past_scores5.csv
+
+diligenceprediction/eval.py
