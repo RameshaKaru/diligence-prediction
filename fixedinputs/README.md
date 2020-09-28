@@ -1,3 +1,3 @@
 - Contains the fixed inputs to the system
-    - cmeans cluster centers
+    - cmeans cluster centers (cluster_centers_cmeans.csv)
     - csv with all subcenter ids (allANM.csv)

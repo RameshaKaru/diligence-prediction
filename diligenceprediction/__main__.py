@@ -13,7 +13,7 @@ if __name__ == '__main__':
     hdps.predict_scores_next(history_vect)
 
     # gets the actual scores of the last 6 months and saves them to csvs
-    # hdps.get_past_scores(test_fraud_prob, meta_features)
+    hdps.get_past_scores(test_fraud_prob, meta_features)
 
     print("end")
     print("--- %s seconds ---" % (time.time() - start_time))
