@@ -40,6 +40,8 @@ ignore_dates:
     - this file is needed to filter out only the needed ANMs, so that it will be easier to rank them
     - provide the csv file location with name from the root package
     - include the sub center ids under the column name 'sub_center_id' in the csv
-    
+ 
+     
+ _Note: Please add atleast 1 year of data as input_  
     
 > Main documentation [link](README.md)

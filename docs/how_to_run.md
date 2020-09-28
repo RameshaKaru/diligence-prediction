@@ -13,5 +13,7 @@
 5. Non diligence scores of the ANMs will be available in a csv file (scores.csv) in /outputs directory.
     - ANMs with higher scores are more non-diligent
     - These non-diligence scores corresponds to the prediction for the upcoming 4 weeks, from the last processed time window of the data set
-    
+   
+6. Additionally, the actual scores of the past 6 months (calculated using the cmeans cluster centers) will be available in the /outputs directory/past_scores{i}.csv
+ 
 > Main documentation [link](../docs/README.md)
