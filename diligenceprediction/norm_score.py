@@ -2,7 +2,7 @@ from .hdps import HDPS
 import pandas as pd
 import numpy as np
 from tensorflow import keras as keras
-import scipy.stats
+# import scipy.stats
 
 
 class NormScore:
@@ -89,10 +89,10 @@ class NormScore:
         fcm_df = pd.read_csv('outputs/scores.csv')
 
         # uncomment to find the correlation between 2 scores
-        norm_scores = list(norm_df['norm_scores'])
-        fcm_scores = list(fcm_df['scores'])
-        cor = scipy.stats.pearsonr(norm_scores, fcm_scores)
-        print("Correlation between norm score and fcm score: ", cor[0])
+        # norm_scores = list(norm_df['norm_scores'])
+        # fcm_scores = list(fcm_df['scores'])
+        # cor = scipy.stats.pearsonr(norm_scores, fcm_scores)
+        # print("Correlation between norm score and fcm score: ", cor[0])
 
         norm_df = norm_df.sort_values(by=['norm_scores'], ascending=False, ignore_index=True)
         norm_ids = list(norm_df['sub_center_id'][:tier_count])
