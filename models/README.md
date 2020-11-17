@@ -5,13 +5,14 @@ This model is a regression model with a LSTM layer followed by a dense layer. Th
 
 > regression_model: Trained model (using TensorFlow 2.3.0)
 
-- Saved model: reg_model_ppr
+- Saved model: reg_model_ppr - fcm score
+               norm_model - simple norm score
 
-#### Neural network architecture
+#### Neural network architecture (fcm score)
 
 ![image info](./plot_model.png)
 
-#### Neural network summary
+#### Neural network summary (fcm score)
 
 ![image info](./summary.JPG)
 
