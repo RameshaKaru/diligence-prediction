@@ -48,7 +48,7 @@ def get_cluster_centers():
     numpy array with cmeans centers of 18 dimensions
 
     """
-    df = pd.read_csv('fixedinputs/cluster_centers_cmeans.csv')
+    df = pd.read_csv('fixedinputs/fcm_centers.csv')
     center1 = np.array(df["cluster1"])
     center2 = np.array(df["cluster2"])
     cntr = np.append(center1.reshape(center1.shape[0], 1), center2.reshape(center2.shape[0], 1), axis=1)
