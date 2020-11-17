@@ -35,7 +35,7 @@ def get_saved_model():
     keras model
 
     """
-    lstm_model_cm = keras.models.load_model('models/reg_model_ppr')
+    lstm_model_cm = keras.models.load_model('models/regression_model_updated2')
     return lstm_model_cm
 
 
