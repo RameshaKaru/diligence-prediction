@@ -6,6 +6,7 @@ This challenging unlabeled data problem is handled by building upon human guidan
 We also provide a more interpretable version of the score.
 This score already provides for a measurement of data collection quality; in addition we also predict the quality for future time steps.
 
+For more details please refer our full paper - available [here](https://arxiv.org/pdf/2011.02962.pdf)
 
 ## System Architecture Diagrams
 
