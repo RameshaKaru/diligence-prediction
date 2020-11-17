@@ -2,6 +2,7 @@ from .hdps import HDPS
 import pandas as pd
 import numpy as np
 from tensorflow import keras as keras
+import scipy.stats
 
 
 class NormScore:
@@ -87,8 +88,10 @@ class NormScore:
         norm_df = pd.read_csv('outputs/norm_scores.csv')
         fcm_df = pd.read_csv('outputs/scores.csv')
 
-        norm_ids = list(norm_df['norm_scores'])
-        fcm_ids = list(fcm_df['scores'])
+        norm_scores = list(norm_df['norm_scores'])
+        fcm_scores = list(fcm_df['scores'])
+        cor = scipy.stats.pearsonr(norm_scores, fcm_scores)
+        print("Correlation between norm score and fcm score: ", cor[0])
 
         norm_df = norm_df.sort_values(by=['norm_scores'], ascending=False, ignore_index=True)
         norm_ids = list(norm_df['sub_center_id'][:tier_count])
@@ -101,4 +104,31 @@ class NormScore:
 
         low_tier_df = pd.DataFrame({'sub_center_id': union_ids})
         low_tier_df.to_csv('outputs/low_tier_anms.csv')
+
+
+    def get_past_scores(self, test_fraud_prob, meta_features, num_anm=85):
+        """
+        This function gets the actual norm scores of the last 6 months
+        and saves them to past_norm_scores{i}.csv in outputs folder
+        """
+
+        print("GETTING ACTUAL PAST NORM SCORES")
+        labels = np.linalg.norm(test_fraud_prob, axis=1, ord=2)
+
+        for i in range(len(meta_features)):
+            window_num_patients = meta_features[i, :, 0]
+            window_scores = labels[i * num_anm: (i + 1) * num_anm]
+            mask = []
+            for j in range(num_anm):
+                if window_num_patients[j] > 0:
+                    mask.append(True)
+                else:
+                    mask.append(False)
+            anm_mask = np.array(self.allANMdf['sub_center_id'])[mask]
+            window_scores_mask = window_scores[mask]
+
+            scores_df = pd.DataFrame({'sub_center_id': anm_mask, 'norm_scores': window_scores_mask})
+            scores_df.to_csv('outputs/past_norm_scores' + str(i) + '.csv')
+
+
 
