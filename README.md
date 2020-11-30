@@ -16,6 +16,12 @@ For more details please refer our full paper - available [here](https://arxiv.or
 ### How the probability vectors are obtained
 ![image info](./images/prob_vec.JPG)
 
+### 2 types of non-diligence scores
+![image info](images/fcm_norm_scores.JPG)
+
+### Categorization of ANMs into 3 tiers
+![image info](images/CategorizationJPG.JPG)
+
 ### Documentation
 
 Please find the main documentation [here](./docs/README.md)

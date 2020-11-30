@@ -72,18 +72,20 @@ class NormScore:
             scores_df.to_csv('outputs/norm_scores.csv')
 
 
-    def get_intersection(self, tier_count=20):
+    def categorize_ANM(self, bad_count=20, good_count=10):
         """
-            Gets the non diligent ANMs using both cmeans score and simple norm score for the next time window and
-            saves them in a csv file
+            Categorizes the ANMs using both cmeans score and simple norm score for the next time window and
+            saves them in csv files
 
             Parameters
             ----------
-            tier_count : int
+            bad_count : int
                 how many worst performers are selected using each score
+            good_count : int
+                how many best performers are selected using each score
 
         """
-        print("Getting non diligent ANMs using both scores")
+        print("Categorizing ANMs using both scores")
 
         norm_df = pd.read_csv('outputs/norm_scores.csv')
         fcm_df = pd.read_csv('outputs/scores.csv')
@@ -95,16 +97,35 @@ class NormScore:
         # print("Correlation between norm score and fcm score: ", cor[0])
 
         norm_df = norm_df.sort_values(by=['norm_scores'], ascending=False, ignore_index=True)
-        norm_ids = list(norm_df['sub_center_id'][:tier_count])
+        all_ids = list(norm_df['sub_center_id'])
+
+        if len(all_ids) < (bad_count + good_count)*1.3:
+            bad_count = int(bad_count/2)
+            good_count = int(good_count/2)
+        norm_ids_bad = list(norm_df['sub_center_id'][:bad_count])
+        norm_ids_good = list(norm_df['sub_center_id'][-good_count:])
 
         fcm_df = fcm_df.sort_values(by=['scores'], ascending=False, ignore_index=True)
-        fcm_ids = list(fcm_df['sub_center_id'][:tier_count])
+        fcm_ids_bad = list(fcm_df['sub_center_id'][:bad_count])
+        fcm_ids_good = list(fcm_df['sub_center_id'][-good_count:])
 
-        union_ids = list(set().union(norm_ids, fcm_ids))
-        print("Number of ANMs in the low-performing tier: ", len(union_ids))
+        print("Total number of ANMs: ", len(all_ids))
+        union_ids = list(set().union(norm_ids_bad, fcm_ids_bad))
+        print("Number of ANMs in the worst-performing tier and percentage: ", len(union_ids), len(union_ids)/len(all_ids))
+
+        intersect_ids = list(set(norm_ids_good).intersection(fcm_ids_good))
+        print("Number of ANMs in the best-performing tier and percentage: ", len(intersect_ids), len(intersect_ids)/len(all_ids))
+
+        categorized_ids = list(set().union(union_ids, intersect_ids))
+        mod_ids = np.setdiff1d(all_ids, categorized_ids)
+        print("Number of ANMs in the moderate-performing tier and percentage: ", len(mod_ids), len(mod_ids)/len(all_ids))
 
         low_tier_df = pd.DataFrame({'sub_center_id': union_ids})
-        low_tier_df.to_csv('outputs/low_tier_anms.csv')
+        low_tier_df.to_csv('outputs/worst_performing_anms.csv')
+        mod_tier_df = pd.DataFrame({'sub_center_id': mod_ids})
+        mod_tier_df.to_csv('outputs/moderate_performing_anms.csv')
+        good_tier_df = pd.DataFrame({'sub_center_id': intersect_ids})
+        good_tier_df.to_csv('outputs/best_performing_anms.csv')
 
 
     def get_past_scores(self, test_fraud_prob, meta_features, num_anm=85):

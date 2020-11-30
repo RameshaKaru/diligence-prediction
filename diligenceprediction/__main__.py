@@ -15,7 +15,7 @@ if __name__ == '__main__':
     # predicts the norm scores for the next 4 weeks and gets the intersection of lowest tier ANMs from both scores
     norms = NormScore(hdps)
     norms.predict_norm_scores_next(history_vect)
-    norms.get_intersection()
+    norms.categorize_ANM()
 
     #gets the actual fcm and norm scores of the last 6 months and saves them to csvs
     hdps.get_past_scores(test_fraud_prob, meta_features)
